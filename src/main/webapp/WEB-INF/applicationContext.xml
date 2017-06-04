@@ -13,7 +13,4 @@
 	
 	<!-- Enable autowire -->
 	<context:annotation-config />
-	
-	<!-- Services -->
-	<bean id="indexService" class="cl.cmartinezs.marifer.services.impl.IndexServiceImpl"></bean>
 </beans>
