@@ -10,4 +10,10 @@
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<!-- Enable component scanning -->
 	<context:component-scan base-package="cl.cmartinezs.marifer" />
+	
+	<!-- Enable autowire -->
+	<context:annotation-config />
+	
+	<!-- Services -->
+	<bean id="indexService" class="cl.cmartinezs.marifer.services.impl.IndexServiceImpl"></bean>
 </beans>

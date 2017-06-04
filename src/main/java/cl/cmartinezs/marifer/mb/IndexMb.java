@@ -1,13 +1,26 @@
 package cl.cmartinezs.marifer.mb;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.annotation.PostConstruct;
 
-@ManagedBean(name = "indexMb")
-@RequestScoped
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import cl.cmartinezs.marifer.services.IndexService;
+
+@Controller
+@Scope("session")
 public class IndexMb {
 
-	private String message = "HOLA MUNDO! desde un ManagedBean";
+	@Autowired
+	private IndexService indexService;
+	
+	private String message;
+	
+	@PostConstruct
+    public void init() {
+		this.message = indexService.getMessage();
+    }
 
 	public String getMessage() {
 		return message;
