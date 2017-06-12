@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@Scope
+@Scope("session")
 public class LanguageMb implements Serializable {
 
 	private static final long serialVersionUID = -8237470747508561119L;

@@ -12,11 +12,11 @@
 	</h:head>
 	<h:body>
 		<h:form>
-	       	<h:commandButton action="#{languageMb.changeLanguage('es')}" value="Español" />
-	       	<h:commandButton action="#{languageMb.changeLanguage('en')}" value="English" />
+	       	<p:commandButton actionListener="#{languageMb.changeLanguage('es')}" value="Español" update="welcome"/>
+	       	<p:commandButton actionListener="#{languageMb.changeLanguage('en')}" value="English" update="welcome"/>
 	   	</h:form>
 		<p>
-	       	<h:outputText value="#{msg['message.welcome']}" />
+	       	<h:outputText id="welcome" value="#{msg['message.welcome']}" />
 	   	</p>
 		<p:editor widgetVar="textEditor" value="#{indexMb.message}" height="300"/>
 	</h:body>
