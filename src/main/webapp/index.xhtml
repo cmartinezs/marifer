@@ -1,23 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{languageMb.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	<h:head >
+<f:view locale="#{languageMb.locale}">
+	<h:head id="head">
 		<title>#{msg['html.head.title.default']}</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link href="#{resource['common:images/favicon.ico']}" rel="shortcut icon" type="image/x-icon" />
 	</h:head>
-	<h:body>
-		<h:form>
-	       	<p:commandButton actionListener="#{languageMb.changeLanguage('es')}" value="Español" update="welcome"/>
-	       	<p:commandButton actionListener="#{languageMb.changeLanguage('en')}" value="English" update="welcome"/>
+	<h:body id="body">
+		<h:form id="formMenuBarPpal">
+			<p:growl id="messages"/>
+
+		    <p:selectOneMenu id="selectLanguage" value="#{languageMb.language}">
+            	<f:selectItem itemLabel="#{msg['selectItem.languaje.defaultLabel']}" itemValue="" noSelectionOption="true"/>
+       			<f:selectItem itemLabel="#{msg['selectItem.languaje.spanishLabel']}" itemValue="es" />
+       			<f:selectItem itemLabel="#{msg['selectItem.languaje.englishLabel']}" itemValue="en" />
+       			<p:ajax listener="#{languageMb.changeLanguage}" update="formMenuBarPpal welcome"/>
+            </p:selectOneMenu>
+            
 	   	</h:form>
 		<p>
 	       	<h:outputText id="welcome" value="#{msg['message.welcome']}" />
 	   	</p>
-		<p:editor widgetVar="textEditor" value="#{indexMb.message}" height="300"/>
+		<p:editor id="textEditor" widgetVar="textEditor" value="#{indexMb.message}" height="300"/>
 	</h:body>
+</f:view>
 </html>

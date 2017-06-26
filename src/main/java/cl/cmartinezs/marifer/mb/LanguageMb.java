@@ -3,7 +3,9 @@ package cl.cmartinezs.marifer.mb;
 import java.io.Serializable;
 import java.util.Locale;
 
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,12 @@ public class LanguageMb implements Serializable {
 
 	private static final long serialVersionUID = -8237470747508561119L;
 	
-	private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+	private Locale locale = null;
+	
+	@PostConstruct
+    public void init() {
+        locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+    }
 
 	public Locale getLocale() {
 		return locale;
@@ -24,9 +31,11 @@ public class LanguageMb implements Serializable {
 		return locale.getLanguage();
 	}
 	
-	public void changeLanguage(String language){
+	public void setLanguage(String language){
 		locale = new Locale(language);
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
 	}
 
+	public void changeLanguage(AjaxBehaviorEvent vce){
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+	}
 }
