@@ -9,7 +9,9 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
 	<!-- Enable component scanning -->
 	<context:component-scan base-package="cl.cmartinezs.marifer" />
 	
@@ -50,4 +52,28 @@
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="mariferAuthenticationDetailsSource" class="cl.cmartinezs.marifer.security.MariferAuthenticationDetailsSource"/>
+	
+	<bean id="mariferAuthenticationProvider" class="cl.cmartinezs.marifer.security.MariferAuthenticationProvider"/>
+
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/auth/**" access="anonymous" />
+		<security:intercept-url pattern="/javax.faces.resource/**"  access="permitAll"/>
+		<security:intercept-url pattern="/**" access="authenticated" />
+		<security:form-login login-page="/auth/login.jsf"
+			authentication-failure-url="/auth/login.jsf?error=true"
+			default-target-url="/"
+			always-use-default-target="true"
+			authentication-details-source-ref="mariferAuthenticationDetailsSource"
+			username-parameter="j_username" 
+			password-parameter="j_password"
+			login-processing-url="/auth/j_spring_security_check" />
+		<security:logout logout-success-url="/" logout-url="/auth/logout"/>        
+        <security:csrf disabled="true" />
+	</security:http>
+
+	<security:authentication-manager>
+    	<security:authentication-provider ref="mariferAuthenticationProvider" />
+	</security:authentication-manager>
 </beans>

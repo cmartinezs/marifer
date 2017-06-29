@@ -12,6 +12,7 @@
 		<org.primefaces.version>6.1</org.primefaces.version>
 		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>
 		<org.springframework.version>4.3.8.RELEASE</org.springframework.version>
+		<org.springframework.security.version>4.2.2.RELEASE</org.springframework.security.version>
 		<org.apache.commons.version>2.1.1</org.apache.commons.version>
 		<org.hibernate.version>5.2.9.Final</org.hibernate.version>
 		<mysql.version>6.0.6</mysql.version>
@@ -69,6 +70,21 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springframework.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
