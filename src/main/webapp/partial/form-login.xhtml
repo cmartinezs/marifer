@@ -1,0 +1,17 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="loginForm" prependId="false">
+		<h1>#{msg['message.welcome']}</h1>
+		<f:event id="updateMessages" listener="#{loginMb.updateMessages(true)}" type="preRenderView" />
+		<p:messages id="errorMessages" />
+		<h:inputText id="j_username" label="#{msg['loginForm.label.username']}" required="true" requiredMessage="#{msg['loginForm.requiredMessage.username']}"/>
+		<p:watermark for="j_username" value="#{msg['loginForm.label.username']}" id="j_username_watermark" />
+		<h:inputSecret id="j_password" label="#{msg['loginForm.label.password']}" required="true" requiredMessage="#{msg['loginForm.requiredMessage.password']}"/>
+		<p:watermark for="j_password" value="#{msg['loginForm.label.password']}" id="j_password_watermark" />
+		<p:commandButton id="signin" type="submit" value="#{msg['loginForm.label.login']}" action="#{loginMb.doLogin}" ajax="false"/>
+   	</h:form>
+</ui:composition>

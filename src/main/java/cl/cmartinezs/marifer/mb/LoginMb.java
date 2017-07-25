@@ -71,7 +71,7 @@ public class LoginMb implements PhaseListener {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 					.put(WebAttributes.AUTHENTICATION_EXCEPTION, null);
 			
-			ResourceBundle bundle = ResourceBundle.getBundle("messages.messages", languageMb.getLocale());
+			ResourceBundle bundle = ResourceBundle.getBundle("bundle.messages", languageMb.getLocale());
 
 			String error = bundle.getString("loginForm.error.invaliduserpassword");
 

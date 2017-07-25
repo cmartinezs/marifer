@@ -59,6 +59,7 @@
 
 	<security:http use-expressions="true">
 		<security:intercept-url pattern="/auth/**" access="anonymous" />
+		<security:intercept-url pattern="/error/**" access="permitAll" />
 		<security:intercept-url pattern="/javax.faces.resource/**"  access="permitAll"/>
 		<security:intercept-url pattern="/**" access="authenticated" />
 		<security:form-login login-page="/auth/login.jsf"

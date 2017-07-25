@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="#{languageMb.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{languageMb.locale}">
+	<h:head id="head">
+		<title>#{msg['html.head.title.error.500']}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="#{resource['common:images/favicon.ico']}" rel="shortcut icon" type="image/x-icon" />
+	</h:head>
+	<h:body id="body">
+	   	<p:panel id="principal-panel">
+	   		<h1>#{msg['page.error.500.h1']}</h1>
+	   		<p>#{msg['page.error.500.p']}</p>
+	   		<ui:include src="../partial/output-link-index.xhtml"/>
+	   	</p:panel>
+	</h:body>
+</f:view>
+</html>

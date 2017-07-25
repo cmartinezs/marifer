@@ -10,7 +10,7 @@
  			org.springframework.web.jsf.el.SpringBeanFacesELResolver
  		</el-resolver>
  		<resource-bundle>
-			<base-name>messages.messages</base-name>
+			<base-name>bundle.messages</base-name>
 			<var>msg</var>
 		</resource-bundle>
 		<locale-config>
@@ -18,4 +18,7 @@
             <supported-locale>en</supported-locale>
         </locale-config>
  	</application>
+ 	<factory>
+        <exception-handler-factory>cl.cmartinezs.marifer.exceptions.handle.MariferExceptionHandleFactory</exception-handler-factory>
+    </factory>
 </faces-config>

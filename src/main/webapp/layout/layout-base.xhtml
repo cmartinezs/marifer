@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="#{languageMb.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{languageMb.locale}">
+	<h:head id="head">
+		<ui:insert name="title">
+			<title></title>
+		</ui:insert>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="#{resource['common:images/favicon.ico']}" rel="shortcut icon" type="image/x-icon" />
+	</h:head>
+	<h:body id="body">
+		<p:panel id="panel-body">
+			<p:panel id="panel-form-language">
+				<ui:include src="../partial/form-select-language.xhtml"/>
+				<ui:include src="../partial/output-link-logout.xhtml"/>
+			</p:panel>
+			<p:panel id="panel-content">
+				<ui:insert name="content">
+				</ui:insert>
+			</p:panel>
+		</p:panel>
+		<ui:insert name="script">
+		</ui:insert>
+	</h:body>
+</f:view>
+</html>
