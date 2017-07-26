@@ -11,8 +11,8 @@
 		<ui:insert name="title">
 			<title></title>
 		</ui:insert>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link href="#{resource['common:images/favicon.ico']}" rel="shortcut icon" type="image/x-icon" />
+		<ui:include src="../partial/meta-tag.xhtml"/>
+		<link href="#{resource['common:images/favicon.ico']}" rel="shortcut icon" type="image/x-icon"></link>
 	</h:head>
 	<h:body id="body">
 		<p:panel id="panel-body">
