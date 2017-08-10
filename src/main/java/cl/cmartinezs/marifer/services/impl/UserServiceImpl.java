@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	@Override
 	@Transactional
 	public User getByUsername(String username) {
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean isValid(Authentication authentication) {
-		String username = (String)authentication.getPrincipal();
+		String username = (String) authentication.getPrincipal();
 		String password = (String) authentication.getCredentials();
 		userLogged = getByUsername(username);
 		return userLogged != null ? userLogged.getPassword().equals(password) : false;
