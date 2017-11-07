@@ -18,6 +18,16 @@
 	<!-- Enable autowire -->
 	<context:annotation-config />
 	
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+	    <property name="scopes">
+	        <map>
+	            <entry key="view">
+	                <bean class="cl.cmartinezs.marifer.jsfspringscope.view.ViewScope"/>
+	            </entry>
+	        </map>
+	    </property>
+	</bean>
+	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
 			<value>classpath:database.properties</value>

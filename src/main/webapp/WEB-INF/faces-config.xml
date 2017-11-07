@@ -17,8 +17,20 @@
             <default-locale>es</default-locale>
             <supported-locale>en</supported-locale>
         </locale-config>
+        <system-event-listener>
+		    <system-event-listener-class>cl.cmartinezs.marifer.jsfspringscope.view.ViewScopeCallbackRegistrer</system-event-listener-class>
+		    <system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
+		    <source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
+	
+		<system-event-listener>
+		    <system-event-listener-class>cl.cmartinezs.marifer.jsfspringscope.view.ViewScopeCallbackRegistrer</system-event-listener-class>
+		    <system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class>
+		    <source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
  	</application>
  	<factory>
         <exception-handler-factory>cl.cmartinezs.marifer.exceptions.handle.MariferExceptionHandleFactory</exception-handler-factory>
     </factory>
+    
 </faces-config>

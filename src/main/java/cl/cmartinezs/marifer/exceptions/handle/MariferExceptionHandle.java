@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.faces.FacesException;
@@ -39,15 +40,22 @@ public class MariferExceptionHandle extends ExceptionHandlerWrapper {
 	public void handle() throws FacesException {
 
 		final Iterator<ExceptionQueuedEvent> i = getUnhandledExceptionQueuedEvents().iterator();
+		final FacesContext fc = FacesContext.getCurrentInstance();
+		
+		if(fc == null){
+			getWrapped().handle();
+			return;
+		}
+		
 		while (i.hasNext()) {
 			ExceptionQueuedEvent event = i.next();
 			ExceptionQueuedEventContext context = (ExceptionQueuedEventContext) event.getSource();
 
 			Throwable t = context.getException();
 
-			final FacesContext fc = FacesContext.getCurrentInstance();
-
 			try {
+				
+				log.log(Level.FINE, "Error capturado", t);
 
 				ExternalContext externalContext = fc.getExternalContext();
 
@@ -59,6 +67,8 @@ public class MariferExceptionHandle extends ExceptionHandlerWrapper {
 					errorPage = bundle.getString("exception.cannot-create-transaction");
 				} else if (isATypeException(t, ViewExpiredException.class)) {
 					errorPage = bundle.getString("exception.view-expired");
+				} else if (isATypeException(t, NoClassDefFoundError.class)) {
+					errorPage = bundle.getString("exception.no-class-def-found-error");
 				} else if (isATypeException(t, FileNotFoundException.class)) {
 					errorPage = bundle.getString("error.404");
 				} else {

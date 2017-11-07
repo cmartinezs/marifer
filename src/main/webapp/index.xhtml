@@ -9,7 +9,10 @@
 		<title>#{msg['html.head.title.index']}</title>
 	</ui:define>
 	<ui:define name="content">
-		<h1><h:outputText id="welcome" value="#{userMb.user.username} #{msg['message.welcome']}" /></h1>
-		<p:editor id="textEditor" widgetVar="textEditor" value="#{indexMb.message}" height="300"/>
-	</ui:define>
+		<h:form id="content">
+			<h1><h:outputText id="welcome" value="#{userLoginMb.user.username} #{msg['message.welcome']}" /></h1>
+			<h:outputText id="user" value="#{userLoginMb.user}" />
+			<p:editor id="textEditor" widgetVar="textEditor" value="#{indexMb.message}" height="300"/>
+		</h:form>
+	</ui:define>	
 </ui:composition>

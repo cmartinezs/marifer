@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+a img {
+	vertical-align: middle;
+}
+
+.ui-paginator span, a img {
+	margin-left: 5px;
+	margin-right: 5px;
+}

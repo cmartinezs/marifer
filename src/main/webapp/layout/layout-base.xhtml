@@ -12,9 +12,11 @@
 			<title></title>
 		</ui:insert>
 		<ui:include src="../partial/meta-tag.xhtml"/>
+		<h:outputStylesheet library="common" name="css/main.css"/>
 		<link href="#{resource['common:images/favicon.ico']}" rel="shortcut icon" type="image/x-icon"></link>
 	</h:head>
 	<h:body id="body">
+		<p:growl id="msgs" showDetail="true" />
 		<p:panel id="panel-body">
 			<p:panel id="panel-form-language">
 				<ui:include src="../partial/form-select-language.xhtml"/>

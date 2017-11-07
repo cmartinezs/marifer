@@ -1,5 +1,7 @@
 package cl.cmartinezs.marifer.repository.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
@@ -16,18 +18,28 @@ public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	@Transactional
 	public User getByUsername(String username) {
 		Session session = this.sessionFactory.getCurrentSession();
-		
-		try 
-		{
-			return (User) session.createQuery("from User where username = :username").setParameter("username", username).getSingleResult();
-		} 
-		catch (NoResultException e) 
-		{
+
+		try {
+			return session.createQuery("from User where username = :username", User.class)
+					.setParameter("username", username).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@Override
+	@Transactional
+	public List<User> getUsers() {
+		Session session = this.sessionFactory.getCurrentSession();
+
+		try {
+			return session.createQuery("from User", User.class).getResultList();
+		} catch (NoResultException e) {
 			return null;
 		}
 	}

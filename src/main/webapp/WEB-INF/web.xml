@@ -13,14 +13,16 @@
 		<param-value>Development</param-value>
 	</context-param>
 	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bluesky</param-value>
 	</context-param>
 	<context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/applicationContext.xml
-        </param-value>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
     <!-- Enable Spring Security -->
 	<filter>
@@ -57,8 +59,4 @@
 	<welcome-file-list>
         <welcome-file>index.jsf</welcome-file>
     </welcome-file-list>
-    <error-page>
-    	<error-code>404</error-code>
-    	<location>/error/404.jsf</location>
-    </error-page>
 </web-app>

@@ -1,0 +1,200 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="../../layout/layout-base.xhtml">
+	<ui:define name="title">
+		<title>#{msg['html.head.title.crud.user.list']}</title>
+	</ui:define>
+	<ui:define name="content">
+			<p:fieldset id="fs-users" legend="#{msg['crud.user.list.fieldset']}" >
+				<h:form id="form-user-list">
+					<p:dataTable id="users" var="user" value="#{userMb.users}" sortMode="multiple"
+						paginator="true" rows="10"
+		        		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+		        		currentPageReportTemplate="#{msg['common.showingCapitale']} {startRecord} - {endRecord} #{msg['common.of']} {totalRecords}"
+		       			rowsPerPageTemplate="10,20,30">
+		       			
+		       			<f:facet name="{Exporters}">
+		       				<span>#{msg['common.exportToCapitale']}</span>
+				            <h:commandLink id="cmdLnk-excel-exports">
+				            	<p:graphicImage id="icon-excel-exports" library="fatcow" name="excel_exports.png" width="16" alt="Excel" title="Excel"/>
+				                <p:dataExporter type="xls" target="users" fileName="#{msg['crud.user.list.fieldset']}" />
+				            </h:commandLink>
+				            <h:commandLink id="cmdLnk-pdf-exports">
+				            	<p:graphicImage id="icon-pdf-exports" library="fatcow" name="pdf_exports.png" width="16" alt="PDF" title="PDF"/>
+				                <p:dataExporter type="pdf" target="users" fileName="#{msg['crud.user.list.fieldset']}" />
+				            </h:commandLink>
+				        </f:facet>
+		       			
+		       			<p:column headerText="#{msg['crud.user.list.column.id']}" sortBy="#{user.id}">
+				            <h:outputText value="#{user.id}" />
+				        </p:column>
+				        
+				        <p:column headerText="#{msg['crud.user.list.column.username']}" sortBy="#{user.username}">
+				            <h:outputText value="#{user.username}" />
+				        </p:column>
+				        
+				        <p:column headerText="#{msg['crud.user.list.column.email']}" sortBy="#{user.email}">
+				            <h:outputText value="#{user.email}" />
+				        </p:column>
+				        
+				        <p:column headerText="#{msg['crud.user.list.column.salt']}" sortBy="#{user.salt}">
+				            <h:outputText value="#{user.salt}" />
+				        </p:column>
+				        
+				        <p:column headerText="#{msg['crud.user.list.column.status']}" sortBy="#{user.status}">
+				            <h:outputText value="#{user.status}" />
+				        </p:column>
+				        
+				        <p:column headerText="#{msg['crud.user.list.column.createdAt']}" sortBy="#{user.createdAt}">
+				            <h:outputText value="#{user.createdAt}" />
+				        </p:column>
+				        
+				        <p:column headerText="#{msg['crud.user.list.column.updatedAt']}" sortBy="#{user.updatedAt}">
+				            <h:outputText value="#{user.updatedAt}" />
+				        </p:column>
+				        
+				        <p:column headerText="#{msg['crud.user.list.column.createdBy']}" sortBy="#{user.createdBy.username}">
+				            <h:outputText value="#{user.createdBy.username}" />
+				        </p:column>
+				        
+				        <p:column styleClass="btn-action-colum" exportable="false">
+		            		<p:commandButton id="btn-view-user" icon="fa fa-fw fa-search" title="#{msg['crud.common.list.action.view']}"
+		             			action="#{userMb.setOnlyReadDlgUser}" update="dlg-user" oncomplete="PF('dlg-user').show()">
+		                		<f:setPropertyActionListener value="#{user}" target="#{userMb.selectedUser}" />
+		            		</p:commandButton>
+		            		<p:commandButton id="btn-edit-user" icon="fa fa-fw fa-edit" title="#{msg['crud.common.list.action.edit']}" 
+		            			action="#{userMb.setEditableDlgUser}" update="dlg-user" oncomplete="PF('dlg-user').show()">
+		                		<f:setPropertyActionListener value="#{user}" target="#{userMb.selectedUser}" />
+		            		</p:commandButton>
+		        		</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:fieldset>
+			<p:dialog id="dlg-user" widgetVar="dlg-user" modal="true" resizable="false" closable="true" header="#{userMb.dlgUserHeader}" showEffect="fade" hideEffect="fade" onHide="">
+				<h:form id="form-user-edit">
+					<p:panelGrid id="pnl-user" rendered="#{not empty userMb.selectedUser}">
+						<p:row rendered="#{userMb.readOnlySelectedUser}">
+							<p:column>
+								<p:outputLabel id="ol-id" for="in-id" value="#{msg['crud.user.view.label.id']}"/>
+							</p:column>
+							<p:column>
+								<p:inputNumber id="in-id" value="#{userMb.selectedUser.id}" readonly="true" decimalPlaces="0"/>
+							</p:column>
+						</p:row>
+						
+						<p:row>
+							<p:column>
+								<p:outputLabel id="ol-username" for="it-username" value="#{msg['crud.user.view.label.username']}"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="it-username" value="#{userMb.selectedUser.username}" readonly="#{userMb.readOnlySelectedUser}"
+			            			required="#{not userMb.readOnlySelectedUser}" requiredMessage="#{msg['crud.user.view.requiredMessage.username']}"/>
+							</p:column>
+						</p:row>
+						
+			            <p:row>
+							<p:column>
+								<p:outputLabel id="ol-email" for="it-email" value="#{msg['crud.user.view.label.email']}"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="it-email" value="#{userMb.selectedUser.email}" readonly="#{userMb.readOnlySelectedUser}"
+					          		required="#{not userMb.readOnlySelectedUser}" requiredMessage="#{msg['crud.user.view.requiredMessage.email']}" 
+					          		validatorMessage="#{msg['crud.user.view.validatorMessage.email']}">
+					            	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" for="it-email" />
+								</p:inputText>
+								<p:message for="it-email"/>
+							</p:column>
+						</p:row>
+						
+						<p:row rendered="#{not userMb.readOnlySelectedUser}">
+							<p:column>
+								<p:outputLabel id="ol-password-one" for="password-one" value="#{msg['crud.user.view.label.password']}" />
+							</p:column>
+							<p:column>
+								<p:password id="password-one" value="#{userMb.passwordOne}" match="password-two" feedback="true"
+									promptLabel="#{msg['crud.user.view.label.password.feedback.prompt']}" 
+									weakLabel="#{msg['crud.user.view.label.password.feedback.weak']}" 
+									goodLabel="#{msg['crud.user.view.label.password.feedback.good']}" 
+									strongLabel="#{msg['crud.user.view.label.password.feedback.strong']}"
+									>
+								</p:password>
+								<p:message for="password-one"/>
+							</p:column>
+						</p:row>
+						
+						<p:row rendered="#{not userMb.readOnlySelectedUser}">
+							<p:column>
+								<p:outputLabel id="ol-password-two" for="password-two" value="#{msg['crud.user.view.label.password']}"/>
+							</p:column>
+							<p:column>
+								<p:password id="password-two" value="#{userMb.passwordTwo}" validatorMessage=""/>
+								<p:message for="password-two"/>
+							</p:column>
+						</p:row>
+			            
+						<p:row>
+							<p:column>
+								<p:outputLabel id="ol-salt" for="it-salt" value="#{msg['crud.user.view.label.salt']}"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="it-salt" widgetVar="it-salt" value="#{userMb.selectedUser.salt}" readonly="true"/>
+								<p:commandButton id="cmdBtn-gen-salt" icon="fa fa-fw fa-refresh" type="button" onclick="$(PrimeFaces.escapeClientId('form-user-edit:it-salt')).val(salt(20));" 
+									rendered="#{not userMb.readOnlySelectedUser}" update="form-user-edit"/>
+							</p:column>
+						</p:row>
+			            
+			            <p:row>
+							<p:column>
+								<p:outputLabel id="ol-status" for="it-status" value="#{msg['crud.user.view.label.status']}"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="it-status" value="#{userMb.selectedUser.status}" readonly="true" rendered="#{userMb.readOnlySelectedUser}"/>
+					            <p:selectOneMenu id="som-status" value="#{userMb.selectedUser.status}" rendered="#{not userMb.readOnlySelectedUser}">
+					            	<f:selectItem itemLabel="#{msg['selectItem.user.edit.status.defaultLabel']}" itemValue="" />
+					            	<f:selectItems value="#{userMb.statuses}"/>
+					            </p:selectOneMenu>
+							</p:column>
+						</p:row>
+			            
+			            <p:row rendered="#{userMb.readOnlySelectedUser}">
+							<p:column>
+								<p:outputLabel id="ol-created" for="it-created" value="#{msg['crud.user.view.label.createdAt']}"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="it-created" value="#{userMb.selectedUser.createdAt}" readonly="true"/>
+							</p:column>
+						</p:row>
+			            
+			            <p:row rendered="#{userMb.readOnlySelectedUser}">
+							<p:column>
+								<p:outputLabel id="ol-updated" for="it-updated" value="#{msg['crud.user.view.label.updatedAt']}"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="it-updated" value="#{userMb.selectedUser.updatedAt}" readonly="true"/>
+							</p:column>
+						</p:row>
+			            
+			            <p:row rendered="#{userMb.readOnlySelectedUser}">
+							<p:column>
+								<p:outputLabel id="ol-createdBy" for="it-createdBy" value="#{msg['crud.user.view.label.createdBy']}"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="it-createdBy" value="#{userMb.selectedUser.createdBy.username}" readonly="true"/>
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+					<p:separator/>
+					<p:commandButton type="submit" value="#{msg['crud.user.view.button.submit']}" rendered="#{not userMb.readOnlySelectedUser}" 
+						actionListener="#{userMb.saveUser}" update="form-user-edit"/>
+					<p:button value="#{msg['crud.user.view.button.cancel']}" onclick="PF('dlg-user').hide();"/>
+				</h:form>
+			</p:dialog>
+	</ui:define>
+	<ui:define name="script">
+		<h:outputScript id="js-salt" library="common" name="js/salt.generator.js"/>
+	</ui:define>
+</ui:composition>
