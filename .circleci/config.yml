@@ -33,3 +33,19 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
       # run tests!
       - run: mvn integration-test
+#  deploy:
+#    docker:
+#      - image: circleci/openjdk:8-jdk
+#      - image: circleci/mysql:8.0.1
+#        environment:
+#          MYSQL_USER: marifer
+#          MYSQL_DB: marifer
+#    steps:
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+ #     - deploy:
+ #       requires:
+ #         - build
