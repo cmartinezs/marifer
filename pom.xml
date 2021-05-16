@@ -14,7 +14,7 @@
 		<org.primefaces.version>6.1</org.primefaces.version>
 		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>
 		<org.springframework.version>4.3.10.RELEASE</org.springframework.version>
-		<org.springframework.security.version>4.2.2.RELEASE</org.springframework.security.version>
+		<org.springframework.security.version>5.2.10.RELEASE</org.springframework.security.version>
 		<org.apache.commons.version>2.1.1</org.apache.commons.version>
 		<org.hibernate.version>5.2.9.Final</org.hibernate.version>
 		<mysql.version>8.0.16</mysql.version>
